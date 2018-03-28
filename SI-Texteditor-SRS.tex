@@ -1,0 +1,263 @@
+\documentclass[utf8]{article}
+\usepackage{fontspec} 
+\usepackage{hyperref}
+\title{Software Requirements Specification za Texteditor}
+\author{“OakTree” d.o.o.}
+
+\begin{document}
+\maketitle
+
+\section{Uvod}
+\subsection{Svrha dokumenta}
+Primarna svrha ovog dokumenta je detaljan opis funkcionalnosti softverskog rješenja koje razvijamo na zahtjev klijenta. U dokumentu su detaljno opisani svi funkcionalni i ostali zahtjevi.\\
+\\
+Softversko rješenje je opisano kroz glavne funkcionalnosti koje su, svaka za sebe, detaljno obrađene, kako bi se na jednostavan način opisale glavne mogućnosti koje softversko rješenje nudi.
+
+\subsection{Standardi dokumentiranja}
+Ovaj dokument je jedini dokument koji opisuje funkcionalnosti TextEditora.     Dokument su pisali: Tucak Adna, Vasiljević Igor, Vrtić Nedim, Vujanović Ana, Vidović Tin i Žilić Nađa. Autorstvo nad dokumentom ima OakTree d.o.o. Dokument je ažuriran prema trenutnoj verziji softverskog rješenja. Dokument je rađen prema IEEE 830 - 1998 standardu uz upotrebu Microsoft Office-a.\\
+\\
+	    \textbf{-  Font:} Times New Roman\\
+	    \textbf{-  Veličina teksta:} 12 (20 za naslove te 18 za podnaslove)
+
+\subsection{Definicije, akronimi i skraćenice}
+\textbf{- Korisnički interfejs} - metod interakcije sa računarom kroz manipulaciju grafičkim elementima i dodacima uz pomoć tekstualnih poruka i obavještenja. Pomoću korisničkog interfejsa upravljamo računarom, koristeći se pri tome ulaznim uređajima poput miša, tastature ili ekrana osjetljivog na dodir. Izlazni uređaj, definiše se kao dio korisničkog interfejsa, na kojem se vizuelno manifestiraju podaci i korisničke akcije, a najčešće korišteni izlazni uređaj je monitor.\\
+\textbf{- Funkcionalni zahtjev} - prikaz aktivnosti koje sistem treba izvršiti, kako sistem treba reagirati na određene ulaze i kako će se sistem ponašati u određenim situacijama.\\
+\textbf{- Nefunkcionalni zahtjev} - Karakteristike i ograničenja koje softver mora imati, odnosno karakteristike koje sistem postavlja u odnosu na aktivnosti i funkcije koje obavlja, kao što su vremenska ograničenja, ograničenja u razvojnom procesu, standardi i slično.\\
+\textbf{- IEEE standard} - Skup preporuka i pravila organizacije IEEE (Institute of Electrical and Electronics Engineers, međuarodna neprofitna profesionalna organizacija za napredovanje tehnologije u vezi sa elektricitetom).\\
+\textbf{- Aplikacija} - računarski program razvijen za pomoć korisnicima da bi izvršavali jedan ili više određenih zadataka.
+
+\subsection{Project scope}
+Dokument sadrži specifikaciju za softversko rješenje TextEditor koje razvija OakTree d.o.o.\\
+\\
+TextEditor se razvija na zahtjev i po specifikacijama klijenta, kao softversko rješenje za obradu teksta na mobilnim uređajima sa Android operativnim sistemom. TextEditor je primarno namijenjen za lakše uređivanje programskog koda uz naglašavanje sintakse programskog jezika sa kojim se radi, u ovu svrhu TextEditor koristi \textbf{highlight.js} komponentu. TextEditor je zamišljen kao pomoćni alat, koji će se koristiti u svrhu otkrivanja malicioznog koda, a koji je moguće koristiti na mobilnim uređajima.
+
+\subsection{Reference}
+IEEE 830 - 1988 standard\\
+\url{http://www.cse.msu.edu/~cse870/IEEEXplore-SRS-template.pdf}\\
+Highlight.js\\
+\url{https://highlightjs.org/}\\
+
+\section{Cjelokupni opis}
+\subsection{Perspektiva proizvoda}
+- TextEditor je program koji omogućava korisniku da unosi, spašava, te mijenja text. Pod textom se smatraju karakteri i brojevi, enkodirani od strane uređaja, poredani tako da imaju neko značenje za korisnika ili za druge programe.\\
+- Source code editor je text editor program dizajniran za uređivanje source koda računarskih programa od strane programera.\\
+- Kako je ranije navedeno Text editor je dizajniran kao text editor i kao source code editor, što mu je i primarna svrha.\\
+\\
+Rješenje koje razvijamo je jednostavni texteditor koji će klijent uključiti u svoje rješenje – aplikaciju za ispitivanje malicioznih aplikacija. Međutim texteditor će biti napravljen tako da ga je moguće koristiti kao nezavisnu aplikaciju. \\
+Svi podaci jednog korisnika ću biti spašeni lokalno, na njegov uređaj čime je obezbjeđena zaštita podataka.
+
+\subsection{Karakteristike korisnika}
+Držeći na umu u koju svrhu se TextEditor razvija, očekuje se da će ovaj program koristiti napredniji korisnici. \\
+Omogućeno je da korisnici na jednostavan način koriste sve funkcionalnosti sistema. S obzirom na to da za samo korištenje aplikacije nije potrebna nikakva vrsta registracije, svi korisnici sistema su međusobno jednaki i imaju mogućnost korištenja svih dostupnih opcija aplikacije.\\
+Također, svi podaci koji pripadaju jednom korisniku su spremljeni na njegov mobilni uređaj, te im samo on može pristupati.
+
+\subsection{Funkcionalnosti sistema}
+Osnovna funkcionalnost sistema je rad sa dokumentom.
+\subsubsection{Rad sa dokumentom}
+Korisnicima su omogućene sljedeće operacije nad dokumentima:\\
+- Stvaranje fajlova\\
+- Stvaranje foldera\\
+- Preimenovanje fajlova\\
+- Brisanje fajlova\\
+- Brisanje foldera\\
+- Premještanje fajlova\\
+- Editovanje fajlova (cut/copy/paste, upravljanje UTF-8 enkodiranim tekstom, text formatting, undo, redo, data transformation, filtering, syntax highlight)\\
+- Refaktoring fajlova\\
+
+\subsection{Ograničenja}
+\subsubsection{Softverska ograničenja}
+Softver je zasnovan na NodeJS platformi i MongoDB bazi podataka i kao takav on je namijenjen za mobilne uređaje sa Android operativnim sistemom i to od verzije 4.1.
+\subsubsection{Hardverska ograničenja}
+Kako bi se aplikacija pokrenula, neophodno je posjedovanje mobilnog uređaja koji ispunjava ranije pomenuta softverska ograničenja.
+
+\subsection{Planiranje zahtjeva}
+Na osnovu obavljenog intervjua, analize rada i procesa firme “OakTree” d.o.o., te firme koja je naš klijent, u ovom dokumentu će biti detaljno opisani zahtjevi koji će biti implementirani. Opis i specifikacija zahtjeva su u skladu sa zakonskim i pravnim regulativama Bosne i Hercegovine.\\
+Sve zahtjeve koje “OakTree“ d.o.o. bude imao prema klijentu ili klijent prema „OakTree“-u odvijat će se prema sljedećoj proceduri:\\
+\\
+U slučaju da klijent želi na bilo koji način izvršiti promjenu na sistemu nakon zaključivanja dokumenta, postupati će se prema sljedećoj proceduri: \\
+ - Klijent dostavlja „OakTree“-u dokument sa jasnim i utemeljenim izmjenama uz odgovarajuća obrazloženja.  \\
+- „OakTree“ je dužan u roku od 72 sata, pismenim putem odgovoriti na dokument.  Ukoliko razvojni tim “OakTree”-a smatra da navedeni zahtjev nije dovoljno jasan, klijent je dužan obezbijediti kvalifikovanog predstavnika koji je dužan razjasniti sve navedene nejasnoće.  \\
+- „OakTree“ je dužan u što kraćem roku odgovoriti pismeno na zahtjeve klijenta u skladu sa složenosti navedenih zahtjeva.\\
+  - Klijent je dužan da u roku od 72 sata validira dokument.\\
+ - U slučaju pozitivnog odgovora, vrši se potpisivanje revidiranog dokumenta, dok u slučaju odbijanja predloženog rješenja, dokument treba sadržavati jasno i utemeljeno objašnjenje.  \\
+- Svaki odgovor koji nije isljučivo pozitivan, odnosno negativan se ne smatra validnim, te kao takav nije svrsishodan. \\
+\\
+U slučaju da „OakTree“ d.o.o. želi na bilo koji način izvršiti promjenu na sistemu nakon zaključivanja dokumenta, postupa se prema sljedećoj proceduri:  \\
+- „OakTree“ dostavlja dokument sa jasno specificiranim i utemeljenim promjenama uz detaljna objašnjenja navedenih promjena. \\
+- Klijent je obavezan da pismenim putem odgovori na dostavljeni dokument unutar 72 sata, od trenutka slanja dokumenta.  \\
+- U slučaju da  je klijent pozitivno odgovorio na dokument,tj. u slučaju prihvatanja navedenih promjena nad sistemom, „OakTree“ dostavlja novu verziju SRS dokumenta sa prihvaćenim izmjenama unutar 72 sata. U suprotnom, tj. ukoliko je klijent odgovorio negativno na dokument, promjene se odbijaju.  \\
+- Ukoliko se utvrdi da je do odbijanja zahtjevanih promjena došlo uslijed nerazumijevanja istih, „OakTree“ je dužan poslati kvalifikovanog predstavnika koji bi trebao razjasniti navedene nejasnoće. \\ 
+- Klijent je dužan da u roku od 72 sata validirati novu verziju SRS-a. U slučaju pozitivnog odgovora, vrši se potpisivanje revidiranog dokumenta, dok u slučaju odbijanja predloženog rješenja, dokument treba sadržavati jasno i utemeljeno objašnjenje.  \\
+- Svaki odgovor koji nije isljučivo pozitivan, odnosno negativan se ne smatra validnim, te kao takav nije svrsishodan.
+
+\section{Konkretni zahtjevi}
+\subsection{Funkcionalni zahtjevi}
+\subsubsection{Stvaranje fajla}
+Sistem će omogućiti korisniku kreiranje novog fajla.\\
+Ulaz: \\
+•	Klik na meni \\
+•	Izbor opcije “Kreiraj novi fajl” \\
+Validacija ulaza: \\
+•	Naziv fajla ne može biti prazno polje. \\
+Niz operacija: \\
+•	Korisniku se nakon što klikne na meni prikazuje padajuća lista sa opcijom “Kreiraj novi fajl” \\
+•	Klikom na “Kreiraj novi fajl” otvara se forma u koju korisnik unosi naziv fajla i bira ekstenziju pod kojom će fajl biti spašen. \\
+•	Kreira se fajl pod tim nazivom klikom na dugme “OK”. \\
+Izlaz: \\
+•	Ukoliko nije unešen naziv fajla, prikazuje se poruka o greški. \\
+•	Ukoliko je unešeni naziv ispravan, kreira se fajl sa tim nazivom i otvara se fajl.\\
+\subsubsection{Stvaranje foldera}
+Korisnik ima mogućnost kreiranja novog foldera.\\
+Ulaz:\\
+•	Klik na meni\\
+•	Izbor opcije “Kreiraj novi folder”\\
+Validacija ulaza:\\
+•	Naziv foldera ne može biti prazno polje.\\
+Niz operacija:\\
+•	Korisniku se nakon što klikne na meni prikazuje padajuća lista sa opcijom “Kreiraj novi folder”.\\
+•	Klikom na “Kreiraj novi folder” otvara se forma u koju korisnik unosi naziv foldera.\\
+•	Klikom na dugme “OK” kreira se folder pod tim nazivom.\\
+•	Sistem će omogućiti korisniku kreiranje novog fajla.\\
+Izlaz:\\
+•	Ukoliko nije unešen naziv foldera, prikazuje se poruka o greški.\\
+•	Ukoliko je unešen ispravan naziv foldera, kreira se folder sa tim imenom.\\
+\subsubsection{Preimenovanje fajlova}
+Korisniku se omogućava preimenovanje fajlova zbog veće preglednosti i bolje organizacije.\\
+Ulaz:\\
+•	Postojeći fajl\\
+•	Klik na stavku menija „Preimenuj fajl“\\
+Validacija ulaza:\\
+•	Novi naziv ne smije biti prazno polje.\\
+•	Novi naziv se ne smije poklapati sa nazivog već postojećeg fajla unutar istog foldera.\\
+•	Nova ekstenzija mora biti validna.\\
+Niz operacija:\\
+•	Korisnik iz menija bira opciju preimenovanja fajla.\\
+•	Preimenovanje se vrši upisom novog naziva i odgovarajuće ekstenzije.\\
+•	Vrši se provjera validnosti zadane ekstenzije.\\
+Izlaz:\\
+•	Ukoliko je uneseni naziv validan, te ukoliko je ekstenzija validna, mijenja se naziv fajla.\\
+•	Ukoliko uneseni naziv fajla nije validan ili ukoliko ekstenzija nije jedna od validnih, prikazuje se poruka o nevalidnim podacima\\
+\subsubsection{Preimenovanje foldera}
+Korisniku se omogućava preimenovanje foldera zbog veće preglednosti i bolje organizacije.\\
+Ulaz:\\
+•	Postojeći folder\\
+•	Klik na stavku menija „Preimenuj folder“\\
+Validacija ulaza:\\
+•	Novi naziv ne smije biti prazno polje.\\
+•	Novi naziv se ne smije poklapati sa nazivog već postojećeg foldera.\\
+Niz operacija:\\
+•	Korisnik iz menija bira opciju preimenovanja foldera.\\
+•	Preimenovanje se vrši upisom novog naziva.\\
+•	Vrši se provjera novododijeljenog naziva, tj. provjerava se da li postoji folder sa istim nazivom.\\
+Izlaz:\\
+•	Ukoliko je uneseni naziv validan, mijenja se naziv foldera.\\
+•	Ukoliko uneseni naziv foldera nije validan , prikazuje se poruka o nevalidnim podacima.\\
+\subsubsection{Brisanje fajlova i foldera}
+Sistem će pri odabiru opcije za brisanje fajla ili foldera, izvršiti brisanje istog sa uređaja\\
+Ulaz:\\
+•	Postojeći folder\\
+•	Klik na opciju  „Obriši fajl“\\
+Validacija ulaza:\\
+•	Nema\\
+Niz operacija:\\
+•	Odabir opcije za brisanje fajla ili foldera\\
+•	Brisanje fajla/foldera\\
+Izlaz:\\
+•	Brisanje fajla nad kojim je opcija odabrana. Zbog načina kako se problem rješava ne postoji mogućnost nastanka greške\\
+\subsubsection{Premještanje fajlova/foldera}
+Korisniku je omogućeno da premjesti fajl/folder sa trenutne lokacije na neku drugu.\\
+Ulaz:\\
+•	Odabran je fajl/folder koji želi premjestiti. \\
+•	Odabrana lokacija na koju će se premjestiti. \\
+Validacija ulaza:\\
+•	Mora biti selektovan fajl/folder.\\
+•	Lokacija na koju ˇzeli premjestiti fajl/folder mora postojati. \\
+Niz operacija:\\
+•	Korisnik bira fajl/folder koji želi premjestiti.\\
+•	Korisnik bira lokaciju na koju želi premjestiti fajl/folder. \\
+•	Vrši se provjera validnosti lokacije.\\
+•	Sistem premješta fajl/folder na željenu lokaciju.\\
+Izlaz:\\
+•	Ukoliko su svi podaci validni fajl/folder se premjeˇsta na ˇzeljenu lokaciju. \\
+•	Ukoliko neki od podataka nisu validni sistem obavještava korisnika gdje se desila greška.\\
+\subsubsection{Editovanje fajlova}
+Korisniku se omogućava editovanje fajlova na vrlo intuitivan način. Pojedinačne opcije koje će korisnik moći odabrati su: cut, copy, paste, upravljanje UTF-8 enkodiranim tekstom, text formatting, undo, redo, data transformation, ﬁltering, syntax highlighting..\\
+Ulaz:\\
+•	Postojeći ili novokreirani fajl  \\
+•	Klik na stavku menija „Uredi fajl“ \\
+Validacija ulaza:\\
+•	Nema\\
+Niz operacija:\\
+•	Korisnik otvara fajl i njegov sadržaj. \\
+•	Mijenja sadržaj fajla uz korištenje opcija koje sistem nudi. \\
+Izlaz:\\
+•	Fajl sa izmijenjenim sadržajem.\\
+\\
+\textbf{- Refaktoring -}\\
+\\
+Sistem će dozvoliti korisniku pretragu i zamjenu speciﬁciranih riječi, u trenutno otvorenom dokumentu, sa novim. Refaktoring će se moći obaviti na 2 načina: \\
+-Zamijena svakog pojavljivanja speciﬁciranog teksta u dokumentu odjednom - Pojedinačna zamjena\\
+\\
+Istovremena zamjena\\
+Ulaz:\\
+•	Tekst za pretragu \\
+•	Zamjenski tekst\\
+•	Odabir opcije za istovremenu zamjenu \\
+Validacija ulaza:\\
+•	Tekst za pretragu mora biti neprazan string. \\
+•	Opcija za refaktorisanje neće biti dostupna ukoliko fajl nije otvoren. \\
+Niz operacija:\\
+•	Unos teksta za pretragu \\
+•	Unos zamjenskog teksta \\
+•	Odabir opcije za istovremenu zamjenu \\
+•	Zamjena svake pojave navedenog teksta sa zamjenskim \\
+Izlaz:\\
+•	Refaktorisan dokument\\
+•	Pojedinačna zamjena\\
+       Ulaz:\\
+•	Tekst za pretragu \\
+•	Zamjenski tekst\\
+•	Odabir opcije za pojedinačnu zamjenu \\
+Validacija ulaza:\\
+•	Tekst za pretragu mora biti neprazan string. \\
+•	Opcija za refaktorisanje neće biti dostupna ako nema otvorenog dokumenta\\
+Niz operacija:\\
+•	Unos teksta za pretragu \\
+•	Unos zamjenskog teksta \\
+•	Odabir opcije za pojedinačnu zamjenu 
+•	Pretraga trenutno otvorenog dokumenta za iduću pojavu navedenog tekst \\
+•	Izmjena tog teksta sa zamjenskim \\
+Izlaz:\\
+•	Djelomično refaktorisan dokument\\
+
+\subsection{Vanjski interfejsi}
+\subsubsection{Hardware interfejsi}
+Hardverski interfejsi su mobilni uređaji krajnjih korisnika.
+\subsubsection{Software interfejsi}
+Texteditor će biti React Native aplikacija. Razvijat će se prvenstveno za Android operativni sistem (minimum Android 4.1, odnosno API 16).
+\subsubsection{Korisnički interfejsi}
+Korisnički interfejs je dizajniran da omogući korisniku što jednostavniji i brži pristup svim funkcionalnostima aplikacije.
+\subsubsection{Komunikacijski interfejsi}
+Aplikacija neće komunicirati sa vanjskim servisima.
+\section{Ostali nefunkcionalni zahtjevi}
+\subsection{Zahtjevi performansi}
+NFZ 1.  Softver TextEditor treba da omogući korisnicima brzo i efikasno unošenje podataka, učitavanje podataka, ažuriranje, te brisanje podataka. Trajanje odziva sistema prilikom ovih akcija treba biti svedeno na minimum, tačnije trajanje odziva treba biti što neprimjetnije korisniku ( <1 sec).
+\subsection{Zahtjevi zaštite i sigurnosti}
+NFZ 2.  Kako je softver TextEditor dostupan za korištenje na jednom korisničkom uređaju, korisnički podaci su u potpunosti zaštićeni od zloupotrebe, zato što ostaju isključivo u memoriji tog uređaja dostupni samo korisniku.
+\section{Ostali zahtjevi}
+\subsection{Skalabilnost}
+Veoma bitna osobina svakog softvera, pa tako i ovog TextEditora je skalabilnost. Prilikom određenih izmjena, skalabilan sistem ima predvidivo ponašanje, te je time eventualno proširenje sistema olakšano. Kako će naš softver biti samo dio jednog većeg softvera, on je dizajniran da bude skalabilan.
+\subsection{Portabilnost}
+Softver je zasnovan na NodeJS platformi i MongoDB bazi podataka, te je namjenjen za mobilne uređaje sa android operativnim sistemom i to od verzije 4.1 i novi android operativni sistema.
+\subsection{Reuse}
+Kako programska paradigma softverskog rješenja teži ka što većem iskorištavanju već postojećih modula, klasa i procedura, te kako u našem softverskom rješenju postoji dosta sličnih procesa (npr. copy i cut), uz manje modifikacije modula se dobija drugi modul, čime se smanjila količina duplog koda te povećala iskorištenost već postojećeg i dobro testiranog modula.
+\subsection{Poruke korisnicima}
+Kada se uspostavi bilo kakva interakcija sa korisnikom koja podrazumjeva bilo kakve operacije sa bazom, odmah se korisniku daje poruka o uspješnosti ili u suprotnom poruka o greškama prilikom unosa. Na ovaj način se osigurava konzistentnost podataka u bazi, ali i adekvatna interakcija sa koisnikom i samim tim sistem postaje više user-friendly.
+\subsection{Korisnička podrška}
+Poslije implementacije informacionog sistema potrebno je obezbijediti podršku korisnicima, koja podrazumjeva održavanje (dinamika razvoja i mogućnosti nabavke novih verzija) i blagovremeno otklanjanje problema. Prosječnom korisniku će biti potrebno oko 2 dana da ovlada velikim dijelom svih opcija našeg sistema.\\
+Korisnička podrška je obezbjeđena kroz help dokumentaciju u kojoj se na detaljan i intuitivan način objašnjena interakcija sa sistemom. Odgovoronost za rad samog informacionog sistema i svih softvreskih resursa ostaje na našim stručnjacima, koji će rješavati sve nastale probleme.
+\subsection{Dostupnost sistema}
+Sistem će biti dostupan 24 sata dnevno, 7 dana u sedmici, sa izuzetkom nepredviđenog kvara na sistemu ili prilikom nadogradnje istog. U slučaju kvara, sistem bi trebao da bude u ponovnoj fukciji najmanje za 12 sati.
+
+
+\end{document}
