@@ -37,26 +37,35 @@ export default class App extends React.Component {
 
     render() {
         if(!this.state.loaded) {
-            return (<Spinner color='gray' style={{flex: 1, backgroundColor:'#303030'}} />);
+            return (
+                <Spinner
+                    style = {{ flex: 1, backgroundColor: '#303030' }}
+                    color = 'gray'  />
+            );
         }
 
         return (
             <Container>
                 <Actionbar
-                    onPressMenu={this.onPressMenu.bind(this)}
-                    onPressMore={this.onPressMore.bind(this)} />
+                    onPressMenu = {this.onPressMenu.bind(this)}
+                    onPressMore = {this.onPressMore.bind(this)} />
 
                 <CustomDrawer
                     ref={(ref) => this._drawer = ref}
-
                     content={
-                        <View style={{flex:1, backgroundColor: '#2a2a2a', justifyContent:'center', alignItems:'center'}}>
+                        <View
+                            style = {{
+                                flex:1,
+                                backgroundColor: '#2a2a2a',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}
+                        >
                             <Text>Drawer</Text>
                         </View>
                     }
-
-                    onOpen={() => this.drawerIsOpen = true}
-                    onClose={() => this.drawerIsOpen = false}
+                    onOpen = {() => this.drawerIsOpen = true}
+                    onClose = {() => this.drawerIsOpen = false}
                 >
 
 
@@ -76,6 +85,7 @@ export default class App extends React.Component {
     }
 
     onPressMenu(event) {
+        this._editText.blur()
         this.drawerIsOpen ? this._drawer.close() : this._drawer.open()
     }
 
@@ -128,7 +138,7 @@ export default class App extends React.Component {
         let originalBuffer = this.state.text;
         let UpdatedBuffer = originalBuffer.replace(this.state.findText, this.state.replaceWithText);
 
-        alert(UpdatedBuffer);
+        //alert(UpdatedBuffer);
 
         this.setState({text: UpdatedBuffer});
 

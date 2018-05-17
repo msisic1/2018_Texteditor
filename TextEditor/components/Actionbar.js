@@ -15,18 +15,28 @@ export class Actionbar extends React.Component {
     render() {
         return (
             <View>
-                <Header style={{backgroundColor:'#303030', height:24}} />{/* status bar */}
+                
+                {/* status bar */}<Header 
+                    style = {{ backgroundColor:'#303030', height:24 }} />
 
-                <Header androidStatusBarColor="#2a2a2a" style={{backgroundColor:'#303030', height:45, paddingLeft:0, paddingRight:0}}>
-                    <Button transparent onPress={this.state.onPressMenu}>
+                <Header
+                    style = {{
+                        backgroundColor:'#303030',
+                        height:45,
+                        paddingLeft:0,
+                        paddingRight:0
+                    }}    
+                    androidStatusBarColor="#2a2a2a"
+                >
+                    <Button transparent onPress = {this.state.onPressMenu}>
                         <Icon name="menu" />
                     </Button>
 
-                    <View style={{flex:1, backgroundColor:this.state.tabColor}}>
+                    <View style = {{ flex: 1, backgroundColor:this.state.tabColor }}>
 
                     </View>
 
-                    <Button transparent onPress={this.state.onPressMore}>
+                    <Button transparent onPress = {this.state.onPressMore}>
                         <Icon name="more" />
                     </Button>
                 </Header>
