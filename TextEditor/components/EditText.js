@@ -5,7 +5,6 @@ export class EditText extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: "",
             lines: '1\n2',
             linesNum: 2,
             selectionStart: 0,
@@ -43,7 +42,7 @@ export class EditText extends React.Component {
                                 textAlign: 'left',
                                 textAlignVertical: 'top',
                                 fontFamily: "VeraMono",
-                                color: '#f2f2f2', 
+                                color: '#f2f2f2',
                                 margin: 0,
                                 padding: 0,
                                 paddingTop: 2.4,
@@ -59,7 +58,10 @@ export class EditText extends React.Component {
                             minWidth = {this.state.minContentWidth}
                             underlineColorAndroid='Color.rgba(0,0,0,0)'
                             multiline
-                            //onChangeText={(text) => this.setState({text})}
+                            onChangeText={this.props.onChangeText}
+                            value = {this.props.text}
+                            //onSelectionChange={(event) => alert(event.nativeEvent.selection)}
+
                             //onContentSizeChange={this.onChangeSize.bind(this)}
                             //onSelectionChange={this.onSelectionChange.bind(this)}
                         >
