@@ -10,6 +10,7 @@ import { Toolbar } from './components/Toolbar';
 import { Actionbar } from './components/Actionbar'
 import { CustomDrawer } from './components/CustomDrawer'
 import { SearchField } from './components/SearchField'
+import {Button} from 'react-native';
 
 //import TreeView from '@zaguini/react-native-tree-view'
 
@@ -52,16 +53,25 @@ export default class App extends React.Component {
                 <CustomDrawer
                     ref={(ref) => this._drawer = ref}
                     content={
-                        <View
+                    <View
                             style = {{
                                 flex:1,
                                 backgroundColor: '#2a2a2a',
                                 justifyContent: 'center',
                                 alignItems: 'center'
                             }}
+                        >  
+                        
+                        <Button
+                            style={{fontSize: 20, color: 'blue'}}
+                            styleDisabled={{color: 'red'}}
+                            onPress={this.onPressNewFile.bind(this)}
+                            title="Kreiraj fajl"
                         >
-                            <Text>Drawer</Text>
-                        </View>
+                            Kreiraj fajl
+                        </Button>
+
+                    </View>
                     }
                     onOpen = {() => this.drawerIsOpen = true}
                     onClose = {() => this.drawerIsOpen = false}
@@ -154,6 +164,10 @@ export default class App extends React.Component {
                 this.findNext({text: newText})
             }
         }
+    }
+
+    onPressNewFile(event){
+        console.log("New file")
     }
 }
 
