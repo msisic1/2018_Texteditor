@@ -1,73 +1,84 @@
 // OVO JE TIN PISAO
 
 import React from 'react';
-import {View, Text, TextInput, Button } from 'react-native';
+import { Dimensions, View, Text, TextInput, Button } from 'react-native';
 
 export class SearchField extends React.Component {
-constructor(props){
-    super(props);
+    constructor(props){
+        super(props);
 
-    this.state = {
+        this.state = {
+            findText: '',
+            replaceWithText: ''
+        };
+    }
 
-                  newBuffer : ''
-                 };
+    render() {
+        return(
+            <View style = {{ padding: 10, paddingBottom: 0, backgroundColor: "#2a2a2a" }}>
 
-    this.isOpen = false;
-    this.U9 = '#U9';
+                <TextInput
+                    style = {{
+                        backgroundColor: '#1b1b1b',
+                        color: 'darkgray',
+                        paddingLeft: 4,
+                        paddingRight: 4,
+                        marginBottom: 10
+                    }}
+                    autoCorrect={false}
+                    autoFocus={false}
+                    placeholder= "Search"
+                    onChangeText={this.onChangeFindText.bind(this)}
+                    value={this.state.findText}
+                    //onSubmitEditing={(event) => this.startSearch()}
+                    underlineColorAndroid='Color.rgba(0,0,0,0)'
+                />
 
+                <TextInput
+                    style = {{
+                        backgroundColor: '#1b1b1b',
+                        color: 'darkgray',
+                        paddingLeft: 4,
+                        paddingRight: 4,
+                        marginBottom: 10
+                    }}
+                    autoCorrect={false}
+                    autoFocus={false}
+                    placeholder="Replace with"
+                    onChangeText={(text) => this.setState({replaceWithText: text})}
+                    value={this.state.replaceWithText}
 
-}
-render() {
-    return(
-        <View style = {{ backfaceVisibility : 'hidden'}}>
+                    underlineColorAndroid='Color.rgba(0,0,0,0)'
+                />
 
-          <TextInput
-          autoCorrect={false}
-          autoFocus={false}
-          placeholder= "Find in current buffer"
-          onChangeText={this.props.onChangeFindText}
-          value={this.state.findText}
-          //onSubmitEditing={(event) => this.startSearch()}
-          underlineColorAndroid='Color.rgba(0,0,0,0)'
-          />
+                <View
+                    style = {{
+                        paddingLeft:1,
+                        flexDirection:'row',
+                        justifyContent : 'space-around',
+                        marginBottom: 10
+                    }}
+                >
+                    <Button
+                        title = 'Replace all'
+                        style={{fontSize: 20, flex : 1}}
+                        color="#841584"
+                        //styleDisabled={{color: 'red'}}
+                        onPress={this.props.onPressReplaceAll} />
 
-          <TextInput
-          autoCorrect={false}
-          autoFocus={false}
-          placeholder="Replace with, in current buffer"
-          onChangeText={this.props.onChangeReplaceWithText}
-          value={this.state.replaceWithText}
+                    <Button
+                        title = 'Replace next'
+                        style={{fontSize: 20, flex : 1}}
+                        color="#841584"
+                        //styleDisabled={{color: 'red'}}
+                        onPress={this.props.onPressReplace} />
+                </View>
 
-          underlineColorAndroid='Color.rgba(0,0,0,0)'
-          />
-
-          <View style = {{flexDirection:'row', justifyContent : 'space-between'}}>
-
-            <Button
-            title = 'Replace all'
-            style={{fontSize: 20, flex : 1}}
-            color="#841584"
-            //styleDisabled={{color: 'red'}}
-            onPress={this.props.onPressReplaceAll}
-            >
-            </Button>
-
-            <Button
-            title = 'Replace next'
-            style={{fontSize: 20, flex : 1}}
-            color="#841584"
-            //styleDisabled={{color: 'red'}}
-            onPress={this.props.onPressReplaceNext}
-            >
-            </Button>
-
-          </View>
-
-        </View>
-
+            </View>
         );
-}
+    }
 
-
-
+    onChangeFindText(text) {
+        this.setState({findText: text}, this.props.onChangeFindText(text));
+    }
 }

@@ -16,8 +16,7 @@ export class Actionbar extends React.Component {
         return (
             <View>
                 
-                {/* status bar */}<Header 
-                    style = {{ backgroundColor:'#303030', height:24 }} />
+                {/* statusbar */}<Header style = {{ backgroundColor:'#303030', height:24 }} />
 
                 <Header
                     style = {{

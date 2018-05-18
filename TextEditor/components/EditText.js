@@ -6,13 +6,14 @@ export class EditText extends React.Component {
         super(props);
         this.state = {
             text : '',
-            lines: '1\n2',
-            linesNum: 2,
+            lines: '1',
+            linesNum: 1,
             selectionStart: 0,
             selectionEnd: 0,
             contentLoaded: false,
             minContentHight: 0,
-            minContentWidth: 0
+            minContentWidth: 0,
+            textChanged: false
         };
     }
 
@@ -25,7 +26,7 @@ export class EditText extends React.Component {
                 overScrollMode = {'never'}
             >
                 <View
-                    style = {{ flexDirection: 'row' }}
+                    style = {{ flexDirection: 'row', flex: 1 }}
                 >
                     { this.state.contentLoaded &&
                         <Text
@@ -65,20 +66,24 @@ export class EditText extends React.Component {
                                 paddingLeft: 4,
                                 paddingRight: 30,
                                 paddingBottom: 38,
-                                lineHeight: 20
+                                lineHeight: 20,
+                                //width: 
                             }}
+                            controlled={true}
                             multiline
                             disableFullscreenUI = {true}
                             minHeight = {this.state.minContentHeight}
                             minWidth = {this.state.minContentWidth}
                             underlineColorAndroid='Color.rgba(0,0,0,0)'
-                            multiline
-                            onChangeText={this.props.onChangeText}
-                            value = {this.props.text}
+                            onChangeText = {(text) => this.setState({text})}
+                            selection= {{start: this.state.selectionStart, end: this.state.selectionEnd}}
+
+                            value = {this.state.newText}
+
                             //onSelectionChange={(event) => alert(event.nativeEvent.selection)}
-                            onContentSizeChange = {this.onChangeSize.bind(this)}
+                            //onContentSizeChange = {this.onChangeSize.bind(this)}
                             onSelectionChange = {this.onSelectionChange.bind(this)}
-                            //onContentSizeChange={this.onChangeSize.bind(this)}
+                            onContentSizeChange={this.onChangeSize.bind(this)}
                             //onSelectionChange={this.onSelectionChange.bind(this)}
                         >
 
@@ -99,8 +104,9 @@ export class EditText extends React.Component {
     }
 
     onNumLineLayout(event) {
+        tmp = Dimensions.get('window').width - event.nativeEvent.layout.width
         this.setState({
-            minContentWidth: Dimensions.get('window').width - event.nativeEvent.layout.width
+            minContentWidth: tmp
         })
     }
 
@@ -111,8 +117,15 @@ export class EditText extends React.Component {
         })
     }
 
+    setSelection(selectionStart, selectionEnd) {
+        //this._textInput.focus()
+        this.setState({ selectionStart: selectionStart, selectionEnd: selectionEnd })
+    }
+
     onChangeSize(event) {
-      this.setState({text: this.props.text})
+      //this.setState({text: this.props.text})
+        //this.setState({contentWidth: event.nativeEvent.contentSize.width + 50})
+
         const ln = this.state.text.split('\n').length
         if(ln != this.state.linesNum) {
             const str = Array.from(new Array(ln),(v,i)=>i+1).join('\n')

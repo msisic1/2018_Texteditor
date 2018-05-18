@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, KeyboardAvoidingView, Text, ToastAndroid } from 'react-native';
 
 import { Font } from 'expo';
 
@@ -17,14 +17,13 @@ export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            text: "", //TIN text koji koristi komponenta EditText, izvucen u klasu app, radi istovremenog i pojediancnog refaktorisanja
             loaded: false,
             searchPressed : false,
-            findText : '', //TIN txt za pretragu koji se treba zamjeniti
-            replaceWithText : '', //TIN text kojim se mijenja findText
+            //findText : '', //TIN txt za pretragu koji se treba zamjeniti
+            //replaceWithText : '', //TIN text kojim se mijenja findText
+            currentIndex: 0
         };
 
-        var drawerIsOpen = false
     }
 
     async componentDidMount() {
@@ -67,18 +66,38 @@ export default class App extends React.Component {
                     onOpen = {() => this.drawerIsOpen = true}
                     onClose = {() => this.drawerIsOpen = false}
                 >
+                    <KeyboardAvoidingView
+                        style={{flex: 1}}
+                        keyboardVerticalOffset={69} // Actionbar height
+                        behavior="padding"
+                        enabled
+                    >
+                        <View style={{flex:1}}>
+                            <EditText ref={(ref) => this._editText = ref} />
+                        </View>
 
-
-                {
-
-                    this.state.searchPressed &&
-                    <SearchField buffer = {this.state.text} onPressReplaceAll = {this.onPressReplaceAll.bind(this)} onPressReplaceNext = {this.onPressReplaceNext.bind(this)}  onChangeFindText = { (findText) => this.setState({findText})} onChangeReplaceWithText = {(replaceWithText) => this.setState({replaceWithText})}></SearchField>
-                    //TIN ukoliko je search dugme pritisnuto renderuje se SearchField komponenta
-                }
-
-                    <EditText text = {this.state.text} ref={(ref) => this._editText = ref} onChangeText = {(text) => this.setState({text})}/>
-
-                    <Toolbar onSearchButtonPress = {this.onPressSearch.bind(this)}/>
+                        { this.state.searchPressed &&
+                            <SearchField
+                                ref={(ref) => this._searchField = ref}
+                                buffer = {this.state.text}
+                                //findText = {this.state.findText}
+                    
+                                onPressReplaceAll = {this.onPressReplaceAll.bind(this)}
+                                onPressReplace = {this.onPressReplace.bind(this)}
+                                onChangeFindText = {(text) => {
+                                    this.setState({currentIndex: 0});
+                                    this.findNext({text: text})
+                                }}
+                                //onChangeFindText = { (findText) => this.setState({findText})}
+                                //onChangeReplaceWithText = {(replaceWithText) => this.setState({replaceWithText})}
+                                />
+                            //TIN ukoliko je search dugme pritisnuto renderuje se SearchField komponenta
+                        }
+                        
+                        <Toolbar
+                            //TIN funkcija koja updateuje searchpressed stanje ukoliko se unutar toolbara klikne na search dugme
+                            onSearchButtonPress = {() => this.setState({searchPressed: !this.state.searchPressed})}/>
+                    </KeyboardAvoidingView>
                 </CustomDrawer>
             </Container>
         );
@@ -92,60 +111,62 @@ export default class App extends React.Component {
     onPressMore(event) {
         console.log("More")
     }
-    //TIN funkcija koja updateuje searchpressed stanje ukoliko se unutar toolbara klikne na search dugme
-    onPressSearch(event)
-    {
-      this.setState({searchPressed: !this.state.searchPressed});
 
+    findNext({text, searchText}) {
+        var currentIndex = this.state.currentIndex
+
+        text = text ? text : this._editText.state.text
+        searchText = searchText ? searchText : this._searchField.state.findText
+
+        if(currentIndex < 0 || currentIndex >= text.length)
+            currentIndex = 0
+        
+        currentIndex = text.regexIndexOf(searchText, currentIndex)
+
+        if(currentIndex >= 0)
+            this._editText.setSelection(currentIndex, currentIndex + searchText.length)
     }
 
     //TIN funkcija koja mijenja sve specificirane instance stringa u dokumentu, na pritisak replace all dugmeta unutar SearchField komponente
-    onPressReplaceAll(event){
-
-      if(this.state.findText === '')
-      {
-        alert("Please specify a search criteria!");
-      }
-      else {
-
-        if(this.state.replaceWithText === '') this.state.replaceWithText = " ";
-
-        let originalBuffer = this.state.text;
-        let UpdatedBuffer = originalBuffer.replace(this.state.findText, this.state.replaceWithText);
-        while(UpdatedBuffer !== UpdatedBuffer.replace(this.state.findText, this.state.replaceWithText))
-        {
-          UpdatedBuffer = UpdatedBuffer.replace(this.state.findText, this.state.replaceWithText);
+    onPressReplaceAll(event) {
+        if(this._searchField.state.findText === '')
+            ToastAndroid.showWithGravityAndOffset('Enter search string', ToastAndroid.SHORT, ToastAndroid.TOP, 0, 150);
+        else {
+            newText = this._editText.state.text.replaceAll(
+                this._searchField.state.findText,
+                this._searchField.state.replaceWithText)
+            this._editText.setState({text: newText, newText: newText}, this._editText.forceUpdate());
         }
-
-
-
-        this.setState({text: UpdatedBuffer});
-
-      }
-
     }
 
-    onPressReplaceNext(event)
-    {
-      if(this.state.findText === '')
-      {
-        alert("Please specify a search criteria!");
-      }
-      else {
-
-        if(this.state.replaceWithText === '') this.state.replaceWithText = " ";
-
-        let originalBuffer = this.state.text;
-        let UpdatedBuffer = originalBuffer.replace(this.state.findText, this.state.replaceWithText);
-
-        //alert(UpdatedBuffer);
-
-        this.setState({text: UpdatedBuffer});
-
-      }
-
+    onPressReplace(event) {
+        if(this._searchField.state.findText === '')
+            ToastAndroid.showWithGravityAndOffset('Enter search string', ToastAndroid.SHORT, ToastAndroid.TOP, 0, 150);
+        else {
+            if(this._editText.state.selectionStart >= 0) {
+                newText = [ this._editText.state.text.slice(0, this._editText.state.selectionStart),
+                            this._searchField.state.replaceWithText,
+                            this._editText.state.text.slice(this._editText.state.selectionEnd)].join('')
+                
+                this._editText.setSelection(this._editText.state.selectionStart, this._editText.state.selectionStart)
+                this._editText.setState({text: newText, newText: newText})
+                
+                this.findNext({text: newText})
+            }
+        }
     }
+}
 
+String.prototype.replaceAllWords = function(str1, str2, ignore) {
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+}
 
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
 
+String.prototype.regexIndexOf = function(str1, startpos, ignore) {
+    var indexOf = this.substring(startpos || 0).search(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")));
+    return (indexOf >= 0) ? (indexOf + (startpos || 0)) : indexOf;
 }

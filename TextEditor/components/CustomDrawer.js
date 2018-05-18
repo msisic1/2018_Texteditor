@@ -24,9 +24,9 @@ export class CustomDrawer extends React.Component {
                 openDrawerOffset = {0.2} // 20% gap on the right side of drawer
                 panOpenMask = {0.15}
                 panCloseMask = {0.2}
-                closedDrawerOffset = {-3}
+                closedDrawerOffset = {0}
                 tweenHandler = {(ratio) => ({
-                    mainOverlay: { backgroundColor:'black', opacity:ratio/3.6 }
+                    mainOverlay: { backgroundColor:'black', opacity:ratio/1.5 }
                 })}
                 tweenDuration = {100}
 
