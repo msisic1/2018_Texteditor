@@ -10,8 +10,10 @@ import { Toolbar } from './components/Toolbar';
 import { Actionbar } from './components/Actionbar'
 import { CustomDrawer } from './components/CustomDrawer'
 import { SearchField } from './components/SearchField'
-import {Button} from 'react-native';
+import { Button } from 'react-native';
 import { MoveField } from './components/MoveField';
+import { NewField } from './components/NewField';
+ 
 
 //import TreeView from '@zaguini/react-native-tree-view'
 
@@ -24,7 +26,8 @@ export default class App extends React.Component {
             //findText : '', //TIN txt za pretragu koji se treba zamjeniti
             //replaceWithText : '', //TIN text kojim se mijenja findText
             currentIndex: 0,
-            movePressed: false
+            movePressed: false,
+           newPressed: false
         };
 
     }
@@ -70,9 +73,9 @@ export default class App extends React.Component {
                             style={{fontSize: 20, color: 'blue'}}
                             styleDisabled={{color: 'red'}}
                             onPress={this.onPressNewFile.bind(this)}
-                            title="Kreiraj fajl"
+                            title="New file"
                         >
-                            Kreiraj fajl
+                            New file
                         </Button>
                             
                         <Button
@@ -117,6 +120,12 @@ export default class App extends React.Component {
                             //TIN ukoliko je search dugme pritisnuto renderuje se SearchField komponenta
                         }
 
+                        { this.state.newPressed &&
+                            <NewField
+                                ref={(ref) => this._newField = ref}
+                            />
+                           
+                        }
                         { this.state.movePressed &&
                             <MoveField
                                 ref={(ref) => this._moveField = ref}
@@ -125,6 +134,7 @@ export default class App extends React.Component {
                             //NAĐA ukoliko je move dugme pritisnuto renderuje se MoveField komponenta
                         }
                         
+
                         <Toolbar
                             //TIN funkcija koja updateuje searchpressed stanje ukoliko se unutar toolbara klikne na search dugme
                             onSearchButtonPress = {() => this.setState({searchPressed: !this.state.searchPressed})}/>
@@ -189,6 +199,7 @@ export default class App extends React.Component {
 
     onPressNewFile(event){
         console.log("New file")
+        this.setState({newPressed: !this.state.newPressed})
     }
     onPressMoveFile(event){
         console.log("Move file")
