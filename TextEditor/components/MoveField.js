@@ -21,6 +21,7 @@ export class MoveField extends React.Component {
                     style = {{
                         backgroundColor: '#1b1b1b',
                         color: 'darkgray',
+                        padding: 0,
                         paddingLeft: 4,
                         paddingRight: 4,
                         marginBottom: 10
@@ -29,6 +30,7 @@ export class MoveField extends React.Component {
                     autoCorrect={false}
                     autoFocus={false}
                     placeholder= "File path"
+                    placeholderTextColor= 'gray'
                     onChangeText={(text) => this.setState({filename: text})}
                     value={this.state.filename}
                     //onSubmitEditing={(event) => this.startSearch()}
@@ -39,6 +41,7 @@ export class MoveField extends React.Component {
                     style = {{
                         backgroundColor: '#1b1b1b',
                         color: 'darkgray',
+                        padding: 0,
                         paddingLeft: 4,
                         paddingRight: 4,
                         marginBottom: 10
@@ -47,6 +50,7 @@ export class MoveField extends React.Component {
                     autoCorrect={false}
                     autoFocus={false}
                     placeholder='Destination'
+                    placeholderTextColor= 'gray'
                     onChangeText={(text) => this.setState({destination: text})}
                     value={this.state.destination}
 

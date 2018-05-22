@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, KeyboardAvoidingView, Text, ToastAndroid } from 'react-native';
 
-import { Font } from 'expo';
+//import { Font } from 'expo';
 
 import { Spinner, Container } from 'native-base'
 
@@ -21,24 +21,24 @@ export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            loaded: false,
+            loaded: true,
             searchPressed : false,
             //findText : '', //TIN txt za pretragu koji se treba zamjeniti
             //replaceWithText : '', //TIN text kojim se mijenja findText
             currentIndex: 0,
             movePressed: false,
-           newPressed: false
+            newPressed: false
         };
 
     }
 
-    async componentDidMount() {
-        await Font.loadAsync({
-            'VeraMono': require('./res/fonts/VeraMono.ttf'),
-            'Inconsolata': require('./res/fonts/Inconsolata.otf')
-        });
-        this.setState({loaded:true})
-    }
+    //async componentDidMount() {
+    //    await Font.loadAsync({
+    //        'VeraMono': require('./res/fonts/VeraMono.ttf'),
+    //        'Inconsolata': require('./res/fonts/Inconsolata.otf')
+    //    });
+    //    this.setState({loaded:true})
+    //}
 
     render() {
         if(!this.state.loaded) {
@@ -92,12 +92,7 @@ export default class App extends React.Component {
                     onOpen = {() => this.drawerIsOpen = true}
                     onClose = {() => this.drawerIsOpen = false}
                 >
-                    <KeyboardAvoidingView
-                        style={{flex: 1}}
-                        keyboardVerticalOffset={69} // Actionbar height
-                        behavior="padding"
-                        enabled
-                    >
+
                         <View style={{flex:1}}>
                             <EditText ref={(ref) => this._editText = ref} />
                         </View>
@@ -138,7 +133,6 @@ export default class App extends React.Component {
                         <Toolbar
                             //TIN funkcija koja updateuje searchpressed stanje ukoliko se unutar toolbara klikne na search dugme
                             onSearchButtonPress = {() => this.setState({searchPressed: !this.state.searchPressed})}/>
-                    </KeyboardAvoidingView>
                 </CustomDrawer>
             </Container>
         );
@@ -173,10 +167,10 @@ export default class App extends React.Component {
         if(this._searchField.state.findText === '')
             ToastAndroid.showWithGravityAndOffset('Enter search string', ToastAndroid.SHORT, ToastAndroid.TOP, 0, 150);
         else {
-            newText = this._editText.state.text.replaceAll(
+            text = this._editText.state.text.replaceAll(
                 this._searchField.state.findText,
                 this._searchField.state.replaceWithText)
-            this._editText.setState({text: newText, newText: newText}, this._editText.forceUpdate());
+            this._editText.setState({text});
         }
     }
 
@@ -185,14 +179,14 @@ export default class App extends React.Component {
             ToastAndroid.showWithGravityAndOffset('Enter search string', ToastAndroid.SHORT, ToastAndroid.TOP, 0, 150);
         else {
             if(this._editText.state.selectionStart >= 0) {
-                newText = [ this._editText.state.text.slice(0, this._editText.state.selectionStart),
+                text = [ this._editText.state.text.slice(0, this._editText.state.selectionStart),
                             this._searchField.state.replaceWithText,
                             this._editText.state.text.slice(this._editText.state.selectionEnd)].join('')
                 
                 this._editText.setSelection(this._editText.state.selectionStart, this._editText.state.selectionStart)
-                this._editText.setState({text: newText, newText: newText})
+                this._editText.setState({text})
                 
-                this.findNext({text: newText})
+                this.findNext({text})
             }
         }
     }

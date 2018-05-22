@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add --save react-native-drawer
+  C:\Program Files\nodejs\node.exe C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js start
 
 PATH: 
   C:\Python27\;C:\Python27\Scripts;;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\Program Files (x86)\Support Tools\;C:\Program Files\MATLAB\R2017a\runtime\win64;C:\Program Files\MATLAB\R2017a\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\dotnet\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_162\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;%SYSTEMROOT%\System32\OpenSSH\;C:\Python36\Scripts\;C:\Python36\;C:\Users\Tt PC\AppData\Local\Microsoft\WindowsApps;C:\MinGW\bin;C:\Program Files\Notepad++;C:\Program Files\Microsoft VS Code\bin;E:\Android\Sdk\platform-tools;E:\Android\Sdk\tools;C:\Users\Tt PC\AppData\Roaming\npm;
@@ -35,10 +35,12 @@ npm manifest:
       "preset": "jest-expo"
     },
     "dependencies": {
+      "@zaguini/react-native-tree-view": "^1.0.3",
       "expo": "^27.0.1",
       "native-base": "^2.4.4",
       "react": "16.3.1",
-      "react-native": "~0.55.2"
+      "react-native": "~0.55.2",
+      "react-native-drawer": "^2.5.0"
     }
   }
 
@@ -624,6 +626,10 @@ Lockfile:
   "@types/node@*":
     version "10.0.8"
     resolved "https://registry.yarnpkg.com/@types/node/-/node-10.0.8.tgz#37b4d91d4e958e4c2ba0be2b86e7ed4ff19b0858"
+  
+  "@zaguini/react-native-tree-view@^1.0.3":
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/@zaguini/react-native-tree-view/-/react-native-tree-view-1.0.3.tgz#b32243a826a991ff850b1a6fb2e2dd45b0f22b48"
   
   abab@^1.0.4:
     version "1.0.4"
@@ -5582,7 +5588,7 @@ Lockfile:
     version "2.0.0-beta.3"
     resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.0.0-beta.3.tgz#2167af86bbc9f964bd45bd5f37684e5b54965e32"
   
-  react-native-drawer@2.5.0:
+  react-native-drawer@2.5.0, react-native-drawer@^2.5.0:
     version "2.5.0"
     resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.5.0.tgz#022cba5c0516126a9fc9cce3185cb46c644b51c4"
     dependencies:
@@ -7325,14 +7331,16 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/yesno/-/yesno-0.0.1.tgz#ffbc04ff3d6f99dad24f7463134e9b92ae41bef6"
 
 Trace: 
-  Error: Missing list of packages to add to your project.
-      at new MessageError (C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:186:110)
-      at Object.<anonymous> (C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:40587:13)
-      at Generator.next (<anonymous>)
-      at step (C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:98:30)
-      at C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:116:14
-      at new Promise (<anonymous>)
-      at new F (C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:23451:28)
-      at Object.<anonymous> (C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:95:12)
-      at Object.run (C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:40599:19)
-      at run (C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:89113:20)
+  Error: Command failed.
+  Exit code: 1
+  Command: C:\WINDOWS\system32\cmd.exe
+  Arguments: /d /s /c react-native-scripts start
+  Directory: C:\Users\Tt PC\Desktop\2018_Texteditor\TextEditor
+  Output:
+  
+      at ProcessTermError.MessageError (C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:186:110)
+      at new ProcessTermError (C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:226:113)
+      at ChildProcess.<anonymous> (C:\Users\Tt PC\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:30281:17)
+      at ChildProcess.emit (events.js:180:13)
+      at maybeClose (internal/child_process.js:936:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)

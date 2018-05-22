@@ -21,6 +21,7 @@ export class SearchField extends React.Component {
                     style = {{
                         backgroundColor: '#1b1b1b',
                         color: 'darkgray',
+                        padding: 0,
                         paddingLeft: 4,
                         paddingRight: 4,
                         marginBottom: 10
@@ -28,6 +29,7 @@ export class SearchField extends React.Component {
                     autoCorrect={false}
                     autoFocus={false}
                     placeholder= "Search"
+                    placeholderTextColor= 'gray'
                     onChangeText={this.onChangeFindText.bind(this)}
                     value={this.state.findText}
                     //onSubmitEditing={(event) => this.startSearch()}
@@ -38,6 +40,7 @@ export class SearchField extends React.Component {
                     style = {{
                         backgroundColor: '#1b1b1b',
                         color: 'darkgray',
+                        padding: 0,
                         paddingLeft: 4,
                         paddingRight: 4,
                         marginBottom: 10
@@ -45,6 +48,7 @@ export class SearchField extends React.Component {
                     autoCorrect={false}
                     autoFocus={false}
                     placeholder="Replace with"
+                    placeholderTextColor= 'gray'
                     onChangeText={(text) => this.setState({replaceWithText: text})}
                     value={this.state.replaceWithText}
 

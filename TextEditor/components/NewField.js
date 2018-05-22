@@ -19,6 +19,7 @@ export class NewField extends React.Component {
                     style = {{
                         backgroundColor: '#1b1b1b',
                         color: 'darkgray',
+                        padding: 0,
                         paddingLeft: 4,
                         paddingRight: 4,
                         marginBottom: 10
@@ -27,6 +28,7 @@ export class NewField extends React.Component {
                     autoCorrect={false}
                     autoFocus={false}
                     placeholder= "File name"
+                    placeholderTextColor= 'gray'
                     onChangeText={(text) => this.setState({filename: text})}
                     value={this.state.filename}
                     underlineColorAndroid='Color.rgba(0,0,0,0)'

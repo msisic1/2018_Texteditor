@@ -12,8 +12,7 @@ export class EditText extends React.Component {
             selectionEnd: 0,
             contentLoaded: false,
             minContentHight: 0,
-            minContentWidth: 0,
-            textChanged: false
+            minContentWidth: 0
         };
     }
 
@@ -24,6 +23,7 @@ export class EditText extends React.Component {
                 style = {{ backgroundColor:'#424242' }}
                 onLayout = {this.onContentLayout.bind(this)}
                 overScrollMode = {'never'}
+                keyboardShouldPersistTaps = {'always'}
             >
                 <View
                     style = {{ flexDirection: 'row', flex: 1 }}
@@ -52,6 +52,7 @@ export class EditText extends React.Component {
                         style = {{ flex: 1 }}
                         horizontal = {true}
                         overScrollMode = {'never'}
+                        keyboardShouldPersistTaps = {'always'}
                     >
                         <TextInput
                             ref = {(ref) => this._textInput = ref}
@@ -67,7 +68,6 @@ export class EditText extends React.Component {
                                 paddingRight: 30,
                                 paddingBottom: 38,
                                 lineHeight: 20,
-                                //width: 
                             }}
                             controlled={true}
                             multiline
@@ -75,10 +75,12 @@ export class EditText extends React.Component {
                             minHeight = {this.state.minContentHeight}
                             minWidth = {this.state.minContentWidth}
                             underlineColorAndroid='Color.rgba(0,0,0,0)'
-                            onChangeText = {(text) => this.setState({text})}
-                            selection= {{start: this.state.selectionStart, end: this.state.selectionEnd}}
+                            onChangeText = {(text) => {
+                                this.setState({text});
+                            }}
+                            //selection= {{start: this.state.selectionStart, end: this.state.selectionEnd}}
 
-                            value = {this.state.newText}
+                            value = {this.state.text}
 
                             //onSelectionChange={(event) => alert(event.nativeEvent.selection)}
                             //onContentSizeChange = {this.onChangeSize.bind(this)}
