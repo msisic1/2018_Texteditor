@@ -119,7 +119,6 @@ export default class App extends React.Component {
                             <NewField
                                 ref={(ref) => this._newField = ref}
                             />
-                           
                         }
                         { this.state.movePressed &&
                             <MoveField
