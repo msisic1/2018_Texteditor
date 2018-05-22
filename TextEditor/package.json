@@ -18,10 +18,10 @@
     "preset": "react-native"
   },
   "dependencies": {
-    "@zaguini/react-native-tree-view": "^1.0.3",
     "native-base": "^2.4.4",
     "react": "16.3.1",
     "react-native": "~0.55.2",
-    "react-native-drawer": "^2.5.0"
+    "react-native-drawer": "^2.5.0",
+    "react-navigation": "^2.0.1"
   }
 }
