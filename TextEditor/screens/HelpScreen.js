@@ -20,7 +20,7 @@ export class HelpScreen extends React.Component {
                         onPress = {() => { this.props.navigation.goBack()}}
                         width={50}
                     >
-                        <Image source={require('../res/images/menu.png')} style={{width: 30, height: 30}}/>
+                        <Image source={require('../res/images/back.png')} style={{width: 30, height: 30}}/>
                     </Button>
                     <View style={{flex:1}} />
                 </Header>

@@ -1,7 +1,7 @@
 // OVO JE NADJA PISALA
 
 import React from 'react';
-import { Dimensions, View, Text, TextInput, Button } from 'react-native';
+import { Dimensions, View, Text, TextInput, Button, ToastAndroid } from 'react-native';
 
 export class MoveField extends React.Component {
     constructor(props){
@@ -70,7 +70,7 @@ export class MoveField extends React.Component {
                         style={{fontSize: 20, flex : 1}}
                         color="#841584"
                         //styleDisabled={{color: 'red'}}
-                        onPress={this.onPressMove} />
+                        onPress={this.onPressMove.bind(this)} />
                 </View>
 
             </View>
@@ -78,6 +78,12 @@ export class MoveField extends React.Component {
     }
 
     onPressMove(event) {
-        console.log("Moving file")
+        if(!this.state.filename){
+            ToastAndroid.showWithGravityAndOffset('Enter file name', ToastAndroid.SHORT, ToastAndroid.TOP, 0, 150)
+        } else if(!this.state.filename) {
+            ToastAndroid.showWithGravityAndOffset('Enter destination', ToastAndroid.SHORT, ToastAndroid.TOP, 0, 150)
+        } else {
+            console.log("Moving file " + this.state.filename + " to " + this.state.destination)
+        }
     }
 }

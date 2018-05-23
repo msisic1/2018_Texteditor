@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, View, Text, TextInput, Button } from 'react-native';
+import { Dimensions, View, Text, TextInput, Button, ToastAndroid } from 'react-native';
 
 export class NewField extends React.Component {
     constructor(props){
@@ -65,7 +65,7 @@ export class NewField extends React.Component {
                         title = 'Create'
                         style={{fontSize: 20, flex : 1}}
                         color="#841584"
-                        onPress={this.onPressNew} />
+                        onPress={this.onPressNew.bind(this)} />
                 </View>
 
             </View>
@@ -73,6 +73,10 @@ export class NewField extends React.Component {
     }
 
     onPressNew(event) {
-        console.log("New file created")
+        if(!this.state.filename) {
+            ToastAndroid.showWithGravityAndOffset('Enter file name', ToastAndroid.SHORT, ToastAndroid.TOP, 0, 150);
+        } else {
+            console.log("New file created")
+        }
     }
 }

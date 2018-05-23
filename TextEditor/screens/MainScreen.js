@@ -66,7 +66,7 @@ export class MainScreen extends React.Component {
                         }}
                     >  
                         <Button
-                            style={{fontSize: 20, color: 'blue'}}
+                            style={{fontSize: 20, color: 'blue', width: 200, margin: 15}}
                             styleDisabled={{color: 'red'}}
                             onPress={this.onPressNewFile.bind(this)}
                             title="New file"
@@ -75,7 +75,7 @@ export class MainScreen extends React.Component {
                         </Button>
                             
                         <Button
-                            style={{fontSize: 20, color: 'blue'}}
+                            style={{fontSize: 20, color: 'blue', width: 200, margin: 15}}
                             styleDisabled={{color: 'red'}}
                             onPress={this.onPressMoveFile.bind(this)}
                             title="Move file"
@@ -84,7 +84,7 @@ export class MainScreen extends React.Component {
                         </Button>
 
                         <Button
-                            style={{fontSize: 20, color: 'blue'}}
+                            style={{fontSize: 20, color: 'blue', width: 200, margin: 15}}
                             styleDisabled={{color: 'red'}}
                             onPress={this.onPressHelp.bind(this)}
                             title="Help"
