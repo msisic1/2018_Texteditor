@@ -80,7 +80,7 @@ export class MoveField extends React.Component {
     onPressMove(event) {
         if(!this.state.filename){
             ToastAndroid.showWithGravityAndOffset('Enter file name', ToastAndroid.SHORT, ToastAndroid.TOP, 0, 150)
-        } else if(!this.state.filename) {
+        } else if(!this.state.destination) {
             ToastAndroid.showWithGravityAndOffset('Enter destination', ToastAndroid.SHORT, ToastAndroid.TOP, 0, 150)
         } else {
             console.log("Moving file " + this.state.filename + " to " + this.state.destination)
