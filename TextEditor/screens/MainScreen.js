@@ -12,6 +12,8 @@ import { Button } from 'react-native';
 import { MoveField } from '../components/MoveField';
 import { NewField } from '../components/NewField';
 
+//import FileSystem from 'react-native-filesystem-v1';
+
 export class MainScreen extends React.Component {
     constructor() {
         super();
@@ -27,6 +29,13 @@ export class MainScreen extends React.Component {
 
     }
 
+    //async function writeToFile() {
+    //    const isAppend = true; // If this variable is set to true, content will be appended to the file.
+    //    const fileContents = 'This is a my content.';
+    //    await FileSystem.writeToFile('my-directory/my-file.txt', fileContents, isAppend);
+    //    console.log('file is written');
+    //}
+
     render() {
         if(!this.state.loaded) {
             return (
@@ -35,6 +44,8 @@ export class MainScreen extends React.Component {
                     color = 'gray'  />
             );
         }
+
+        //writeToFile()
 
         return (
             <Container>
@@ -98,10 +109,7 @@ export class MainScreen extends React.Component {
                     
                                 onPressReplaceAll = {this.onPressReplaceAll.bind(this)}
                                 onPressReplace = {this.onPressReplace.bind(this)}
-                                onChangeFindText = {(text) => {
-                                    this.setState({currentIndex: 0});
-                                    this.findNext({text: text})
-                                }}
+                                onChangeFindText = {(text) => { this.findFirst({text: text}) }}
                                 //onChangeFindText = { (findText) => this.setState({findText})}
                                 //onChangeReplaceWithText = {(replaceWithText) => this.setState({replaceWithText})}
                             />
@@ -139,19 +147,18 @@ export class MainScreen extends React.Component {
         console.log("More")
     }
 
-    findNext({text, searchText}) {
-        var currentIndex = this.state.currentIndex
-
-        text = text ? text : this._editText.state.text
-        searchText = searchText ? searchText : this._searchField.state.findText
-
-        if(currentIndex < 0 || currentIndex >= text.length)
-            currentIndex = 0
+    findFirst(text, searchText) {
+        if(!text) text = this._editText.state.text
+        if(!searchText) searchText = this._searchField.state.findText
         
-        currentIndex = text.regexIndexOf(searchText, currentIndex)
+        this.setState({currentIndex: text.regexIndexOf(searchText, 0)})
+    }
 
-        if(currentIndex >= 0)
-            this._editText.setSelection(currentIndex, currentIndex + searchText.length)
+    findNext({text, searchText}) {
+        if(!text) text = this._editText.state.text
+        if(!searchText) searchText = this._searchField.state.findText
+        
+        this.setState({currentIndex: text.regexIndexOf(searchText, this.state.currentIndex)})
     }
 
     //TIN funkcija koja mijenja sve specificirane instance stringa u dokumentu, na pritisak replace all dugmeta unutar SearchField komponente
@@ -170,14 +177,14 @@ export class MainScreen extends React.Component {
         if(this._searchField.state.findText === '')
             ToastAndroid.showWithGravityAndOffset('Enter search string', ToastAndroid.SHORT, ToastAndroid.TOP, 0, 150);
         else {
-            if(this._editText.state.selectionStart >= 0) {
-                text = [ this._editText.state.text.slice(0, this._editText.state.selectionStart),
+            const { currentIndex } = this.state.currentIndex
+
+            if(currentIndex >= 0) {
+                text = [ this._editText.state.text.slice(0, currentIndex),
                             this._searchField.state.replaceWithText,
-                            this._editText.state.text.slice(this._editText.state.selectionEnd)].join('')
+                            this._editText.state.text.slice(this.state.currentIndex + this._searchField.state.findText.length)].join('')
                 
-                this._editText.setSelection(this._editText.state.selectionStart, this._editText.state.selectionStart)
                 this._editText.setState({text})
-                
                 this.findNext({text})
             }
         }
@@ -194,6 +201,6 @@ export class MainScreen extends React.Component {
     }
 
     onPressHelp() {
-        this.props.navigation.push('Help')
+        this.props.navigation.navigate('Help')
     }
 }
