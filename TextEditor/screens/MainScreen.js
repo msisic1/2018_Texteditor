@@ -35,6 +35,7 @@ export class MainScreen extends React.Component {
     //    await FileSystem.writeToFile('my-directory/my-file.txt', fileContents, isAppend);
     //    console.log('file is written');
     //}
+    
 
     render() {
         if(!this.state.loaded) {
@@ -147,11 +148,11 @@ export class MainScreen extends React.Component {
         console.log("More")
     }
 
-    findFirst(text, searchText) {
+    findFirst({text, searchText}) {
         if(!text) text = this._editText.state.text
         if(!searchText) searchText = this._searchField.state.findText
         
-        this.setState({currentIndex: text.regexIndexOf(searchText, 0)})
+        this.setState({currentIndex: text.regexIndexOf(searchText)})
     }
 
     findNext({text, searchText}) {
@@ -169,6 +170,8 @@ export class MainScreen extends React.Component {
             text = this._editText.state.text.replaceAll(
                 this._searchField.state.findText,
                 this._searchField.state.replaceWithText)
+
+                console.log('text: |' + text)
             this._editText.setState({text});
         }
     }
@@ -177,13 +180,14 @@ export class MainScreen extends React.Component {
         if(this._searchField.state.findText === '')
             ToastAndroid.showWithGravityAndOffset('Enter search string', ToastAndroid.SHORT, ToastAndroid.TOP, 0, 150);
         else {
-            const { currentIndex } = this.state.currentIndex
+            console.log('i:' + this.state.currentIndex)
 
-            if(currentIndex >= 0) {
-                text = [ this._editText.state.text.slice(0, currentIndex),
+            if(this.state.currentIndex >= 0 && this.state.currentIndex < this._editText.state.text.length) {
+                text = [ this._editText.state.text.slice(0, this.state.currentIndex),
                             this._searchField.state.replaceWithText,
                             this._editText.state.text.slice(this.state.currentIndex + this._searchField.state.findText.length)].join('')
-                
+
+                console.log('text: |' + text)
                 this._editText.setState({text})
                 this.findNext({text})
             }

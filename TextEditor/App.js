@@ -29,7 +29,7 @@ String.prototype.replaceAllWords = function(str1, str2, ignore) {
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
-};
+}
 
 String.prototype.regexIndexOf = function(str1, startpos, ignore) {
     var indexOf = this.substring(startpos || 0).search(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")));
