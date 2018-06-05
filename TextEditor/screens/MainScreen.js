@@ -27,6 +27,8 @@ export class MainScreen extends React.Component {
             newPressed: false
         };
 
+        this.onModChange = this.onModChange.bind(this)
+
     }
 
     //async function writeToFile() {
@@ -133,7 +135,8 @@ export class MainScreen extends React.Component {
 
                         <Toolbar
                             //TIN funkcija koja updateuje searchpressed stanje ukoliko se unutar toolbara klikne na search dugme
-                            onSearchButtonPress = {() => this.setState({searchPressed: !this.state.searchPressed})}/>
+                            onSearchButtonPress = {() => this.setState({searchPressed: !this.state.searchPressed})}
+                            changeMod = {() => this.onModChange()}/>
                 </CustomDrawer>
             </Container>
         );
@@ -206,5 +209,9 @@ export class MainScreen extends React.Component {
 
     onPressHelp() {
         this.props.navigation.navigate('Help')
+    }
+
+    onModChange(){
+        this._editText.changeColor();
     }
 }

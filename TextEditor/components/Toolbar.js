@@ -24,7 +24,9 @@ export class Toolbar extends React.Component {
                     <Button transparent onPress = {this.props.onSearchButtonPress} style={{justifyContent:'center',width:50}}>
                         <Image source={require('../res/images/search.png')} style={{width: 30, height: 30}}/>
                     </Button>
-                    <Button transparent><Icon style={{color:'darkgray'}} name="help" /></Button>
+                    <Button transparent onPress = {this.props.changeMod} style={{justifyContent:'center',width:50}}>
+                        <Image source={require('../res/images/sun.png')} style={{width: 30, height: 30}}/>
+                    </Button>
                     <Button transparent><Icon style={{color:'darkgray'}} name="help" /></Button>
                     <Button transparent><Icon style={{color:'darkgray'}} name="help" /></Button>
                     <Button transparent><Icon style={{color:'darkgray'}} name="help" /></Button>

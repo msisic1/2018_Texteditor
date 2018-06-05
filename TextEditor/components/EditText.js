@@ -12,15 +12,35 @@ export class EditText extends React.Component {
             selectionEnd: 0,
             contentLoaded: false,
             minContentHight: 0,
-            minContentWidth: 0
+            minContentWidth: 0,
+            color1 : '#424242',
+            color2 : '#383838',
+            textColor: '#f2f2f2'
         };
+        this.changeColor = this.changeColor.bind(this)
+    }
+
+    changeColor(){
+       if(this.state.color2 == '#383838' ){
+            this.setState( {
+                color1 : '#ffffff',
+                color2 : '#ffffff',
+                textColor: '#1a1a1a'
+            })
+        } else {
+            this.setState({
+                color1 : '#424242',
+                color2 : '#383838',
+                textColor: '#f2f2f2'
+            })
+        }
     }
 
     render() {
         return (
             <ScrollView
                 ref = 'content'
-                style = {{ backgroundColor:'#424242' }}
+                style = {{ backgroundColor: this.state.color1 }}
                 onLayout = {this.onContentLayout.bind(this)}
                 overScrollMode = {'never'}
                 keyboardShouldPersistTaps = {'always'}
@@ -31,7 +51,7 @@ export class EditText extends React.Component {
                     { this.state.contentLoaded &&
                         <Text
                             style = {{
-                                backgroundColor: '#383838',
+                                backgroundColor: this.props.color2,
                                 color: 'gray',
                                 minWidth: 40,
                                 margin: 0,
@@ -41,7 +61,7 @@ export class EditText extends React.Component {
                                 paddingRight: 4,
                                 textAlign: 'right',
                                 lineHeight: 20,
-                                fontFamily: 'VeraMono',
+                                
                             }}
                             onLayout = {this.onNumLineLayout.bind(this)}
                         >
@@ -59,8 +79,7 @@ export class EditText extends React.Component {
                             style = {{
                                 textAlign: 'left',
                                 textAlignVertical: 'top',
-                                fontFamily: "VeraMono",
-                                color: '#f2f2f2',
+                                color: this.state.textColor,
                                 margin: 0,
                                 padding: 0,
                                 paddingTop: 2.4,
